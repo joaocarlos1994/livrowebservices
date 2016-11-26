@@ -5,11 +5,14 @@ import java.util.Map;
 
 import javax.ws.rs.core.Application;
 
+import org.springframework.stereotype.Component;
+
 
 /**
  * A <code>MyApplication</code> foi criada para utilizar o
  * Jersey. Ela e um singleton que configura o Jersey.
  * */
+@Component
 public class MyApplication extends Application {
 	
 	/**

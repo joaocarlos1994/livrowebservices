@@ -12,6 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import br.com.livro.domain.Carro;
 import br.com.livro.domain.CarroService;
 import br.com.livro.wrapper.Response;
@@ -22,8 +24,14 @@ import br.com.livro.wrapper.Response;
 @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class CarrosResource {
 	
-	private final CarroService carroService = new CarroService();
+	private final CarroService carroService;
 	
+	@Autowired
+	public CarrosResource(final CarroService carroService) {
+		super();
+		this.carroService = carroService;
+	}
+
 	@GET
 	public List<Carro> get() {
 		final List<Carro> carros = carroService.listaCarros();

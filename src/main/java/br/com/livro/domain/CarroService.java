@@ -1,73 +1,51 @@
 package br.com.livro.domain;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+@Component
 public class CarroService {
 
-	private final CarroDao carroDao = new CarroDao();
+	private final CarroDao carroDao;
+	
+	@Autowired
+	public CarroService(final CarroDao carroDao) {
+		super();
+		this.carroDao = carroDao;
+	}
 
 	public List<Carro> listaCarros() {
-		try {
-			final List<Carro> carros = carroDao.getCarros();
-			return Collections.unmodifiableList(carros);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// return type Generic
-			return new ArrayList<>();
-		}
+		final List<Carro> carros = carroDao.getCarros();
+		return carros;
 	}
 
 	public Carro getCarro(final Long id) {
-		try {
-			final Carro carro = carroDao.getCarroById(id);
-			return carro;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
+		return carroDao.getCarroById(id);
 	}
 
+	// Deleta o carro pelo id
+	@Transactional(rollbackFor=Exception.class)
 	public boolean delete(final Long id) {
-		try {
-			return carroDao.delete(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
+		return carroDao.delete(id);
 	}
 
+	//Salva ou atualizar o carro
+	@Transactional(rollbackFor=Exception.class)
 	public boolean save(final Carro carro) {
-		try {
-			carroDao.save(carro);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
+		carroDao.saveOrUpdate(carro);
+		return true;
 	}
 	
+	//Busca pelo nome
 	public List<Carro> findByName(final String name) {
-		try {
-			final List<Carro> carros = carroDao.findByName(name);
-			return Collections.unmodifiableList(carros);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
+		return carroDao.findByName(name);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public <E> List<E> findByTipo(final String tipo) {
-		try {
-			final List<Carro> carros = carroDao.findByTipo(tipo);
-			return (List<E>) carros;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
+		return carroDao.findByTipo(tipo);
 	}
 
 }
