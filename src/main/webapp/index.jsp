@@ -8,12 +8,10 @@
 </head>
 <body>
 	
-	<form method="post" action="<%=request.getContextPath()%>/hello">
-		Nome: <input type="text" name="nome" />
-		<br /><br />
-		Sobrenome: <input type="text" name="sobrenome" />
-		<br />
-		<input type="submit" name="Enviar" />
+	<form enctype="multipart/form-data" method="post" action="<%=request.getContextPath()%>/rest/carros">
+		<!-- O tipo "file" cria o botão Browse para escolher o arquivo -->
+		<input name="file" type="file" />
+		<input type="submit" value="Enviar arquivo" />
 	</form>
 	
 	

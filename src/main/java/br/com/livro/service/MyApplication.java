@@ -1,10 +1,13 @@
 package br.com.livro.service;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.springframework.stereotype.Component;
 
 
@@ -20,13 +23,13 @@ public class MyApplication extends Application {
 	 * ao Jersey. Neste caso, a classe JettisonFeature faz configuracao
 	 * para permitir que o Jersey retorne dados em JSON.
 	 * */
-/*	@Override
+	@Override
 	public Set<Object> getSingletons() {
 		Set<Object> singletons = new HashSet<>();
-		//Para gerar JSON
-		singletons.add(new JettisonFeature());
+		// Suporte ao file upload
+		singletons.add(new MultiPartFeature());
 		return singletons;
-	}*/
+	}
 	
 	/**
 	 * Este metodo configura a propriedade jersey.config.server.provider.packges

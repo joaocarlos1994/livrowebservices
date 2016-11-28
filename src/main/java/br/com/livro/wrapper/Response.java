@@ -20,6 +20,13 @@ public class Response {
 		final Response response = new Response("OK", mensagem);
 		return response;
 	}
+	
+	public static Response Error(String string) {
+		Response r = new Response();
+		r.setStatus("ERROR");
+		r.setMsg(string);
+		return r;
+	}
 
 	public String getStatus() {
 		return status;

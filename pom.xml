@@ -9,6 +9,7 @@
 	<properties>
 		<spring.version>4.2.6.RELEASE</spring.version>
 		<hibernate.version>4.3.10.Final</hibernate.version>
+		<jersey.version>2.18</jersey.version>
 	</properties>
 	<!-- Dependencias -->
 	<dependencies>
@@ -76,6 +77,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- Jersey Upload -->
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-multipart</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -118,6 +125,12 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.11</version>
+		</dependency>
+		<!-- Commons-IO -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
 		</dependency>
 	</dependencies>
 
