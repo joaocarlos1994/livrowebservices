@@ -1,7 +1,6 @@
 package br.com.livro.service;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
@@ -25,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.livro.domain.Carro;
 import br.com.livro.domain.CarroService;
+import br.com.livro.domain.ResponseWithURL;
 import br.com.livro.domain.UploadService;
 import br.com.livro.wrapper.Response;
 
@@ -90,9 +90,9 @@ public class CarrosResource {
 		return Response.ok("Carro atualizado com sucesso");
 	}
 	
-	@POST
+/*	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response postFoto(final FormDataMultiPart multiPart) {
+	public Response postFoto(final FormDataMultiPart multiPart) throws Exception {
 		if (multiPart != null && multiPart.getFields() != null) {
 			final Set<String> keys = multiPart.getFields().keySet();
 			for (final String key : keys) {
@@ -112,7 +112,7 @@ public class CarrosResource {
 			}
 		}
 		return Response.ok("Requisição inválida");
-	}
+	}*/
 	
 	@POST
 	@Path("/toBase64")
@@ -157,6 +157,29 @@ public class CarrosResource {
 			}
 		}
 		return Response.Error("Requisição inválida.");
+	}
+	
+	@POST
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public ResponseWithURL postFoto(final FormDataMultiPart multiPart) {
+		final Set<String> keys = multiPart.getFields().keySet();
+		for (final String key : keys) {
+			
+			// Obtem a InputStream para ler o arquivo
+			final FormDataBodyPart field = multiPart.getField(key);
+			final InputStream in = field.getValueAs(InputStream.class);
+			
+			
+			try {
+				final String fileName = field.getFormDataContentDisposition().getFileName();
+				final String url = uploadService.upload(fileName, in);
+				return ResponseWithURL.OK("Arquivo recebido com sucesso", url);
+			} catch (final Exception e) {
+				e.printStackTrace();
+				return ResponseWithURL.Error("Erro ao enviar o arquivo");
+			}
+		}
+		return ResponseWithURL.Error("Requisição inválida");
 	}
 	
 }
