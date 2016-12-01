@@ -1,6 +1,7 @@
 package br.com.livro.domain;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -82,7 +83,7 @@ public class UploadService {
 		return "text/plain";
 	}
 
-	private File saveToTmpDir(final String fileName, final InputStream in) throws IOException {
+	private File saveToTmpDir(final String fileName, final InputStream in) throws FileNotFoundException, IOException {
 		
 		if (fileName == null || in == null) {
 			throw new IllegalArgumentException("Parâmetros inválidos");
