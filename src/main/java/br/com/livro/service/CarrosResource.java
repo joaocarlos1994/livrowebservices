@@ -176,7 +176,7 @@ public class CarrosResource {
 				return ResponseWithURL.OK("Arquivo recebido com sucesso", url);
 			} catch (final Exception e) {
 				e.printStackTrace();
-				return ResponseWithURL.Error("Erro ao enviar o arquivo");
+				return ResponseWithURL.Error("Erro ao enviar o arquivo [" + e.getMessage() +"]");
 			}
 		}
 		return ResponseWithURL.Error("Requisição inválida");
