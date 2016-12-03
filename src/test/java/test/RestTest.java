@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 import br.com.livro.domain.Carro;
 import br.com.livro.domain.ResponseWithURL;
@@ -24,7 +25,8 @@ public class RestTest extends TestCase {
 		// Cria o cliente da API
 		final ClientConfig clientConfig = new ClientConfig();
 		final Client client = ClientBuilder.newClient(clientConfig);
-		// Registra o parse com o Google Gson
+		// Autentica com o usuario livro.
+		client.register(HttpAuthenticationFeature.basic("livro", "livro123"));
 		client.register(GsonMessageBodyHandler.class);
 		final String URL = "http://localhost:8081/carros/rest";
 		// Cria a requisicao com o "caminho"
@@ -44,7 +46,8 @@ public class RestTest extends TestCase {
 		// Cria o cliente da API
 		final ClientConfig clientConfig = new ClientConfig();
 		final Client client = ClientBuilder.newClient(clientConfig);
-		// Registra o parse com o Google Gson
+		// Autentica com o usuario livro.
+		client.register(HttpAuthenticationFeature.basic("admin", "admin123"));
 		client.register(GsonMessageBodyHandler.class);
 		final String URL = "http://localhost:8081/carros/rest";
 		// Cria a requisicao com o "caminho"
@@ -67,7 +70,8 @@ public class RestTest extends TestCase {
 		// Cria o cliente da API
 		final ClientConfig clientConfig = new ClientConfig();
 		final Client client = ClientBuilder.newClient(clientConfig);
-		// Registra o parse com o Google Gson
+		// Autentica com o usuario livro.
+		client.register(HttpAuthenticationFeature.basic("admin", "admin123"));
 		client.register(GsonMessageBodyHandler.class);
 		// Cria os parametros do formulario
 		final String base64 = Base64.getEncoder().encodeToString("Ricado Lecheta".getBytes());
@@ -96,7 +100,8 @@ public class RestTest extends TestCase {
 		// Cria o cliente da API
 		final ClientConfig clientConfig = new ClientConfig();
 		final Client client = ClientBuilder.newClient(clientConfig);
-		// Registra o parse com o Google Gson
+		// Autentica com o usuario livro.
+		client.register(HttpAuthenticationFeature.basic("admin", "admin123"));
 		client.register(GsonMessageBodyHandler.class);
 		// Cria os parametros do formulario
 		final Carro c = new Carro();

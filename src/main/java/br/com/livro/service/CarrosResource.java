@@ -182,4 +182,12 @@ public class CarrosResource {
 		return ResponseWithURL.Error("Requisição inválida");
 	}
 	
+	@GET
+	@Path("/toBase64/{texto}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String toBase64(final @PathParam("texto") String texto) {
+		final String base64 = Base64.getEncoder().encodeToString(texto.getBytes());
+		return base64;
+	}
+	
 }
