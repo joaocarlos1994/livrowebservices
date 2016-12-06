@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.springframework.stereotype.Component;
 
 
@@ -41,6 +42,17 @@ public class MyApplication extends Application {
 		Map<String, Object> properties = new HashMap<>();
 		properties.put("jersey.config.server.provider.packages", "br.com.livro");
 		return properties;
+	}
+	
+	/**
+	 * Este e metodo e necessario para habilitar a seguranca por metodos.
+	 * */
+	@Override
+	public Set<Class<?>> getClasses() {
+		final Set<Class<?>> s = new HashSet<Class<?>>();
+		// Seguranca por anotacao - JSR-250
+		s.add(RolesAllowedDynamicFeature.class);
+		return s;
 	}
 	
 }

@@ -28,7 +28,7 @@ public class RestTest extends TestCase {
 		// Autentica com o usuario livro.
 		client.register(HttpAuthenticationFeature.basic("livro", "livro123"));
 		client.register(GsonMessageBodyHandler.class);
-		final String URL = "http://localhost:8081/carros/rest";
+		final String URL = "http://localhost:8080/carros/rest";
 		// Cria a requisicao com o "caminho"
 		final WebTarget target = client.target(URL).path("/carros/11");
 		final Response response = target.request(MediaType.APPLICATION_JSON).get();
@@ -41,29 +41,27 @@ public class RestTest extends TestCase {
 
 	}
 
-	public void testDeleteCarroId() {
-
-		// Cria o cliente da API
-		final ClientConfig clientConfig = new ClientConfig();
-		final Client client = ClientBuilder.newClient(clientConfig);
-		// Autentica com o usuario livro.
-		client.register(HttpAuthenticationFeature.basic("admin", "admin123"));
-		client.register(GsonMessageBodyHandler.class);
-		final String URL = "http://localhost:8081/carros/rest";
-		// Cria a requisicao com o "caminho"
-		final WebTarget target = client.target(URL).path("/carros/39");
-		// Faz a requisicao do tipo GET solicitando um JSON como resposta
-		final Response response = target.request(MediaType.APPLICATION_JSON).delete();
-		// Status HTTP de retorno
-		final int status = response.getStatus();
-		// Valida se a req
-		assertEquals(200, status);
-		// Le um Carro (converte diretamente da string JSON)
-		final br.com.livro.wrapper.Response s = response.readEntity(br.com.livro.wrapper.Response.class);
-		assertEquals("OK", s.getStatus());
-		assertEquals("Carro deletado com sucesso", s.getMsg());
-
-	}
+	/*
+	 * public void testDeleteCarroId() {
+	 * 
+	 * // Cria o cliente da API final ClientConfig clientConfig = new
+	 * ClientConfig(); final Client client =
+	 * ClientBuilder.newClient(clientConfig); // Autentica com o usuario livro.
+	 * client.register(HttpAuthenticationFeature.basic("admin", "admin123"));
+	 * client.register(GsonMessageBodyHandler.class); final String URL =
+	 * "http://localhost:8080/carros/rest"; // Cria a requisicao com o "caminho"
+	 * final WebTarget target = client.target(URL).path("/carros/39"); // Faz a
+	 * requisicao do tipo GET solicitando um JSON como resposta final Response
+	 * response = target.request(MediaType.APPLICATION_JSON).delete(); // Status
+	 * HTTP de retorno final int status = response.getStatus(); // Valida se a
+	 * req assertEquals(200, status); // Le um Carro (converte diretamente da
+	 * string JSON) final br.com.livro.wrapper.Response s =
+	 * response.readEntity(br.com.livro.wrapper.Response.class);
+	 * assertEquals("OK", s.getStatus()); assertEquals(
+	 * "Carro deletado com sucesso", s.getMsg());
+	 * 
+	 * }
+	 */
 
 	public void testPostFormParams() {
 
@@ -78,7 +76,7 @@ public class RestTest extends TestCase {
 		final Form form = new Form();
 		form.param("fileName", "nome.xt");
 		form.param("base64", base64);
-		final String URL = "http://localhost:8081/carros/rest";
+		final String URL = "http://localhost:8080/carros/rest";
 		// Cria a requisicao com o "caminho"
 		final WebTarget target = client.target(URL).path("/carros/postFotoBase64");
 		// Faz a requisicao do tipo GET solicitando um JSON como resposta
@@ -106,7 +104,7 @@ public class RestTest extends TestCase {
 		// Cria os parametros do formulario
 		final Carro c = new Carro();
 		c.setNome("Novo Carro");
-		final String URL = "http://localhost:8081/carros/rest";
+		final String URL = "http://localhost:8080/carros/rest";
 		// Cria a requisicao com o "caminho"
 		final WebTarget target = client.target(URL).path("/carros/");
 		// Faz a requisicao do tipo GET solicitando um JSON como resposta

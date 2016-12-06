@@ -6,6 +6,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -32,6 +34,7 @@ import br.com.livro.wrapper.Response;
 @Path("/carros")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+@PermitAll
 public class CarrosResource {
 	
 	private final CarroService carroService;
@@ -73,18 +76,21 @@ public class CarrosResource {
 	
 	@DELETE
 	@Path("{id}")
+	@RolesAllowed("admin")
 	public Response delete(final @PathParam("id") long id) {
 		carroService.delete(id);
 		return Response.ok("Carro deletado com sucesso");
 	}
 	
 	@POST
+	@RolesAllowed("admin")
 	public Response post(final Carro carro) {
 		carroService.save(carro);
 		return Response.ok("Carro salvo com sucesso");
 	}
 	
 	@PUT
+	@RolesAllowed("admin")
 	public Response put(final Carro carro) {
 		carroService.save(carro);
 		return Response.ok("Carro atualizado com sucesso");
@@ -118,6 +124,7 @@ public class CarrosResource {
 	@Path("/toBase64")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.TEXT_PLAIN)
+	@RolesAllowed("admin")
 	public String toBase64(final FormDataMultiPart multiPart) {
 		if (multiPart != null) {
 			final Set<String> keys = multiPart.getFields().keySet();
@@ -140,6 +147,7 @@ public class CarrosResource {
 	
 	@POST
 	@Path("/postFotoBase64")
+	@RolesAllowed("admin")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response postFotoBase64(final @FormParam("fileName") String fileName, @FormParam("base64") String base64) {
 		if (fileName != null && base64 != null) {
@@ -161,6 +169,7 @@ public class CarrosResource {
 	
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@RolesAllowed("admin")
 	public ResponseWithURL postFoto(final FormDataMultiPart multiPart) {
 		final Set<String> keys = multiPart.getFields().keySet();
 		for (final String key : keys) {
