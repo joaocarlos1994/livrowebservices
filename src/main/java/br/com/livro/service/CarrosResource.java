@@ -6,7 +6,6 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -34,7 +33,7 @@ import br.com.livro.wrapper.Response;
 @Path("/carros")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-@PermitAll
+@RolesAllowed({"user", "admin"})
 public class CarrosResource {
 	
 	private final CarroService carroService;

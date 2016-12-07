@@ -11,6 +11,7 @@
 		<hibernate.version>4.3.10.Final</hibernate.version>
 		<jersey.version>2.18</jersey.version>
 		<google.apis.version>1.19.0</google.apis.version>
+		<jersey.oauth.version>2.19</jersey.oauth.version>
 	</properties>
 	<!-- Dependencias -->
 	<dependencies>
@@ -148,6 +149,23 @@
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client-java6</artifactId>
 			<version>${google.apis.version}</version>
+		</dependency>
+
+		<!-- Servidor do OAuth 1.0 -->
+		<dependency>
+			<groupId>org.glassfish.jersey.security</groupId>
+			<artifactId>oauth1-server</artifactId>
+			<version>${jersey.oauth.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-entity-filtering</artifactId>
+			<version>${jersey.oauth.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-mvc-jsp</artifactId>
+			<version>${jersey.oauth.version}</version>
 		</dependency>
 	</dependencies>
 

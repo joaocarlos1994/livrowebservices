@@ -25,25 +25,6 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
-	<!-- Área Segura - Todos Usuários Logados -->
-	<security-constraint>
-		<display-name>Todos os usuarios logados</display-name>
-		<web-resource-collection>
-			<web-resource-name>all</web-resource-name>
-			<url-pattern>/rest/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<!-- Deixa todos os perfis -->
-			<role-name>user</role-name>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
-	<!-- Basic Authentication -->
-	<login-config>
-		<auth-method>BASIC</auth-method>
-		<realm-name>Web Service Restrito</realm-name>
-	</login-config>
-
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
